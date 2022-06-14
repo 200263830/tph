@@ -1,0 +1,62 @@
+// /**
+//  * Copyright © Magento, Inc. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+
+//
+//  Extend fallback
+//  _____________________________________________
+
+//  Magento extend fallback handling. Should be EMPTY.
+
+//  Colors nesting (maker)
+@color-maker-red: #E4002B;
+@color-maker-gray: #D0D0CE;
+@color-maker-light-gray: #EDEDED;
+// @color-maker-dark-gray: #7d7d7d;
+@color-maker-dark-gray: @color-dark-gray;
+@color-maker-yellow: #F6BE00;
+@color-maker-light-blue: #5B7F95;
+@color-maker-dark-blue: #0C2340;
+@color-maker-white: #FFFFFF;
+
+//  Text color
+//@text__color: @color-maker-dark-blue;
+
+//
+//  Color nesting
+//  ---------------------------------------------
+
+@theme__color__primary: @color-maker-dark-blue; //@color-blue1;
+@theme__color__primary-alt: darken(@color-maker-dark-blue, 15%); //@color-blue2;
+@theme__color__secondary: @color-maker-red; //@color-orange-red1;
+
+@primary__color: @color-maker-dark-blue;
+@primary__color__dark: darken(@primary__color, 35%); // #000
+@primary__color__darker: darken(@primary__color, 13.5%); // #111
+@primary__color__lighter: lighten(@primary__color, 29%); // #7d7d7d
+@primary__color__light: lighten(@primary__color, 45%); // #a6a6a6
+
+@secondary__color: @color-maker-white; // @color-gray91; //this effects the hover background color popup submenu??
+@secondary__color__light: lighten(@secondary__color, 15%);
+
+@page__background-color: @color-white;
+@panel__background-color: darken(@page__background-color, 5%);
+
+@active__color: @theme__color__secondary;
+@error__color: @color-red10;
+
+@copyright__background-color: @page__background-color;
+
+@button-primary__color: @color-white;
+@button-primary__hover__color: @color-white;
+@button-primary__background: @color-maker-red;
+@button-primary__hover__background: darken(@color-maker-red, 5%);
+@button-primary__border: 1px solid @color-maker-red;
+@button-primary__hover__border: 1px solid darken(@color-maker-red, 5%);
+
+
+
+@import 'lib/variables/_extend-variables.less';
+@import 'lib/variables/_extend-colors.less';
+@import 'lib/variables/_extend-buttons.less';

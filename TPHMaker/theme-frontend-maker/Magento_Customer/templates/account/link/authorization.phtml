@@ -1,0 +1,43 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/**
+ * @var \Magento\Customer\Block\Account\AuthorizationLink $block
+ * @var \Magento\Framework\Escaper $escaper
+ * @var \Magento\Framework\UrlInterface $urlInterface
+ */
+$dataPostParam = '';
+if ($block->isLoggedIn()) {
+    $dataPostParam = sprintf(" data-post='%s'", $block->getPostParams());
+}
+
+$urlInterface = \Magento\Framework\App\ObjectManager::getInstance()->get('Magento\Framework\UrlInterface');
+
+?>
+<?php
+if ($block->isLoggedIn()) {
+    ?>
+    <li class="link authorization-link signout" data-label="or">
+        <span style="display: none;"><img src="<?= substr($urlInterface->getBaseUrl(),0, -6); ?>?option=oauthredirect&app_name=AzureB2C&redirect_url=<?= substr($urlInterface->getBaseUrl(),0, -6); ?>img/1x1-00ffff7f.png"></span>
+        <?php
+            if (strpos($urlInterface->getBaseUrl(), 'stage.')){
+                $LoginUrl= "https://tphexternaltesting01.b2clogin.com/TPHExternalTesting01.onmicrosoft.com/oauth2/v2.0/authorize?p=B2C_1_TPH_SUSI&client_id=7af91ffa-2aa2-4304-9e73-5733c07ffb09&nonce=defaultNonce&redirect_uri=".substr($urlInterface->getBaseUrl(),0, -6)."myaccount/img/1x1-00ffff7f.png&scope=openid&response_type=id_token&prompt=none";
+            }else{
+
+                $LoginUrl= "https://tphb2cprod001.b2clogin.com/tphb2cprod001.onmicrosoft.com/oauth2/v2.0/authorize?p=B2C_1_TPH_SUSI&client_id=9a513efe-fef9-4837-94ee-cc4a7bb31230&nonce=defaultNonce&redirect_uri=".substr($urlInterface->getBaseUrl(),0, -6)."/myaccount/img/1x1-00ffff7f.png&scope=openid&response_type=id_token&prompt=none";
+                //$LoginUrl= "https://login.tph.ca/login.tph.ca/oauth2/v2.0/authorize?p=B2C_1_TPH_SUSI&client_id=9a513efe-fef9-4837-94ee-cc4a7bb31230&nonce=defaultNonce&redirect_uri=".substr($urlInterface->getBaseUrl(),0, -6)."/myaccount/img/1x1-00ffff7f.png&scope=openid&response_type=id_token&prompt=none";
+            }
+        ?>
+        <span style="display: none;"><img src="<?=$LoginUrl?>"></span>
+
+        <a href="<?= substr($urlInterface->getBaseUrl(),0, -6); ?>myaccount/">Account</a>
+    </li>
+<?php } else { ?>
+    <li class="link authorization-link signin">
+        <a href="<?= $urlInterface->getBaseUrl();?>mooauth/actions/sendAuthorizationRequest/?relayState=<?=substr($urlInterface->getBaseUrl(),0, -6)?>?option=oauthredirect%26app_name=AzureB2C%26redirect_url=<?= $urlInterface->getCurrentUrl();?>"><?= $escaper->escapeHtml($block->getLabel()) ?></a>
+    </li>
+<?php } ?>
+

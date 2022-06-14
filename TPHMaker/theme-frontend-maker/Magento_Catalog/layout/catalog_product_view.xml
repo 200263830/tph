@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <move element="page.main.title" destination="product.info.main" before="-"/>
+        <move element="product.info.stock.sku" destination="product.info.price" after="product.price.final"/>
+        <move element="product.info.review" destination="product.info.main" before="product.info.price"/>
+        <move element="product.price.final" destination="product.info.addtocart.additional" before="-"/> <!-- Price move before the add to cart -->
+        <move element="product.info.overview" destination="product.info.main" after="product.info.review" /> <!-- Short Discription Move after the product review -->
+        <referenceContainer name="product.info.main"> <!-- Create a block for the design with a professional -->
+                <block class="Magento\Catalog\Block\Product\View" name="custom.block.addtocart" template="Magento_Catalog::preview.phtml"/>
+        </referenceContainer>
+        <move element="custom.block.addtocart" destination="product.info.main" before="product.info.extrahint"/>        
+    </body>
+</page>

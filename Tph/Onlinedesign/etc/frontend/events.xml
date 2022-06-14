@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category    TPH
+ * @package     Tph_Onlinedesign
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <!-- <event name="page_block_html_topmenu_gethtml_before">
+        <observer name="Tph_Onlinedesign_observer" instance="Tph\Onlinedesign\Observer\Topmenu" />
+    </event> -->
+    <event name="checkout_cart_add_product_complete">
+        <observer name="after_add_to_cart" instance="Tph\Onlinedesign\Observer\Addcatalogcart" />
+    </event>
+   <!--<event name="checkout_cart_product_add_after">
+        <observer name="Tph_onlinedesign_checkout_cart_product_add_after" instance="Tph\Onlinedesign\Observer\CanvaProductAdd" />
+    </event>-->
+    <event name="checkout_cart_product_update_after">
+        <observer name="Tph_onlinedesign_checkout_cart_product_add_after" instance="Tph\Onlinedesign\Observer\CanvaProductUpdate" />
+    </event>
+</config>

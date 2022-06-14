@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category    TPH
+ * @package     Tph_Onlinedesign
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Checkout\Block\Cart\Item\Renderer">
+        <plugin name="Canva_Product_Image_In_Checkout_Cart" type="Tph\Onlinedesign\Plugin\CheckoutCart\Image"
+                sortOrder="1"/>
+    </type>
+    <type name="Magento\Framework\App\RouterList">
+        <arguments>
+            <argument name="routerList" xsi:type="array">
+                <item name="onlindesignrouter" xsi:type="array">
+                    <item name="class" xsi:type="string">Tph\Onlinedesign\Controller\Router</item>
+                    <item name="disable" xsi:type="boolean">false</item>
+                    <item name="sortOrder" xsi:type="string">31</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Checkout\CustomerData\AbstractItem">
+     <plugin name="Change_Product_Image_In_Minicart" type="Tph\Onlinedesign\Plugin\CheckoutCart\MinicartImage" sortOrder="1" />
+</type>
+</config>

@@ -1,0 +1,380 @@
+// /**
+//  * Copyright © Magento, Inc. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+
+//
+//  Variables
+//  _____________________________________________
+
+@import 'fields/_file-uploader.less';
+
+@checkout-wrapper__margin: @indent__base;
+@checkout-wrapper__columns: 16;
+
+@checkout-step-title__border: @border-width__base solid @color-gray80;
+@checkout-step-title__font-size: 26px;
+@checkout-step-title__font-weight: @font-weight__light;
+@checkout-step-title__padding: @indent__s;
+
+@checkout-step-title-mobile__font-size: 18px;
+
+@checkout-step-content-mobile__background: @color-gray-light01;
+@checkout-step-content-mobile__margin-s: 15px;
+@checkout-step-content-mobile__margin: @indent__base -(@checkout-step-content-mobile__margin-s) @checkout-step-content-mobile__margin-s;
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+
+    .checkout-index-index {
+        .page-title-wrapper {
+            &:extend(.abs-visually-hidden all);
+        }
+        .page-main {
+            max-width: 1700px;
+        }
+        .page-title-wrapper {
+            position: relative;
+            overflow: unset;
+            margin: 0;
+            width: 100%;
+            height: auto;
+            text-align: center;
+            margin-bottom: 6px;
+        }
+    }
+
+    .checkout-container {
+        &:extend(.abs-add-clearfix all);
+    }
+
+    .opc-wrapper {    
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.12);        
+        .opc {
+            &:extend(.abs-reset-list all);
+        }
+
+        .step-title {
+            &:extend(.abs-checkout-title all);
+            margin-bottom: 15px;
+            padding-bottom: 0;
+            .lib-font-size(24);
+            font-family: @font-family-name__makerBL;
+            color: @color-maker-dark-gray;
+        }
+
+        .step-content {
+            margin: 0 0 @indent__xl;
+        }
+        .action.action-edit-address {
+            padding: 0;
+            text-decoration: underline !important;
+            margin-left: 10px;
+            color: @color-maker-link;
+            background-color: transparent;
+            border: none;
+        }
+    }
+
+    .checkout-index-index {
+        .nav-sections,
+        .nav-toggle {
+            display: none;
+        }
+
+        .logo {
+            margin-left: 0;
+        }
+    }
+
+    .checkout-onepage-success {
+        &:extend(.abs-add-clearfix all);
+
+        .print {
+            display: none;
+        }
+    }
+
+    .abs-discount-code {
+        .form-discount {
+            display: table;
+            width: 100%;
+
+            .actions-toolbar {
+                display: table-cell;
+                vertical-align: top;
+                width: 1%;
+
+                .primary {
+                    float: left;
+                    .action {
+                        &:extend(.abs-revert-to-action-secondary all);
+                        border-bottom-left-radius: 0;
+                        border-top-left-radius: 0;
+                        margin: 0 0 0 -2px;
+                        white-space: nowrap;
+                        width: auto;
+                        box-shadow: none !important;
+                        color: @color-maker-white;
+                        padding: 12px 30px;
+                        font-weight: @font-weight__regular;
+                        .lib-font-size(16);
+                        margin-left: 20px;
+                        border-radius: 3px;
+                    }
+                }
+            }
+
+            > .field {
+                > .label {
+                    display: none; 
+                }
+            }
+        }
+    }
+    
+    div.field-tooltip {
+        .field-tooltip-content {
+            background-color: #f2f2f2;
+            border-color: #f2f2f2;
+            color: @color-maker-dark-blue;
+            .lib-font-size(18);
+            padding: 16px;
+            width: auto;
+            min-width: 200px;
+            &:before {
+                border-right-color: #f2f2f2;
+            }
+            &::after {
+                border-right-color: #f2f2f2;
+            }
+        }
+    }
+    
+    .checkout-onepage-success {
+        .page-main {
+            text-align: center;
+            padding-top: 40px;
+            padding-bottom: 60px;
+            position: relative;
+            .actions-toolbar {
+                text-align: center;
+                .primary {
+                    float: none;
+                    margin-top: 12px;
+                }
+                .action.primary {
+                    margin-right: 0;
+                    .lib-font-size(24);
+                    font-weight: @font-weight__regular;
+                    line-height: 1;
+                    min-width: 280px;
+                    padding: 11px 20px;
+                }
+            }
+            > .page-title-wrapper {
+                .page-title {
+                    + .action {
+                        margin-top: 10px;
+                        .lib-font-size(18);
+                        position: absolute;
+                        top: 0;
+                        right: 20px;
+                        color: @color-maker-dark-blue;
+                    }
+                }
+            }
+        }
+    }
+    .checkout-success {
+        color: @color-maker-dark-blue;
+        .lib-font-size(24);
+        p {
+            margin-bottom: 6px;
+        }        
+        a {
+            color: @color-maker-dark-blue;            
+        }
+        strong {
+            font-family: @font-family-name__makerRG;
+        }
+    }
+    #registration {
+        margin-top: 100px;
+        color: @color-maker-dark-blue;
+        .lib-font-size(24);
+        p {
+            margin-bottom: 6px;
+        }        
+        a {
+            color: @color-maker-dark-blue;            
+        }
+        strong {
+            font-family: @font-family-name__makerRG;
+        }
+        br {
+            display: none; 
+        }
+        .action.primary {
+            margin-right: 0;
+            .lib-font-size(24);
+            font-weight: @font-weight__regular;
+            line-height: 1;
+            min-width: 280px;
+            padding: 11px 20px;
+            margin-top: 22px;
+            color: @color-maker-white;
+        }  
+    }
+
+    //
+    //  Tablet
+    //  _____________________________________________
+    @media only screen and (min-width: 768px) and (max-width: 1199px) {
+        .checkout-success {
+            .lib-font-size(20);
+        }        
+        .checkout-onepage-success {
+            .page-main {
+                .actions-toolbar {
+                    .action.primary {
+                        .lib-font-size(20);
+                        min-width: 240px;
+                    }
+                }
+                .page-title-wrapper {
+                    .page-title {
+                        + .action {
+                            .lib-font-size(16);
+                        }
+                    }
+                }
+            }
+        }
+        #registration {
+            .lib-font-size(20);
+            margin-top: 80px;
+            .action.primary {
+                .lib-font-size(20);
+                min-width: 240px;
+            }
+        }
+    }
+
+    //
+    // Small Tablet
+    //  _____________________________________________
+    @media only screen and (min-width: 768px) and (max-width: 992px) {
+        .checkout-container {
+            .opc-wrapper {
+                width: 100%;
+            }
+            .opc-progress-bar {
+                width: 100%;
+                padding: 0;
+                margin-bottom: 30px;
+            }
+        }
+    }
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .opc-wrapper {
+        .step-title {
+            .lib-css(font-size, @checkout-step-title-mobile__font-size);
+            border-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .step-content {
+            .lib-css(margin, 0 0 @checkout-step-content-mobile__margin-s);
+        }
+    }
+    .checkout-index-index {
+        .columns {
+            .column.main {
+                padding-bottom: 0;
+            }
+        }
+    }
+    .abs-discount-code {
+        .form-discount {
+            .actions-toolbar {                
+                .primary {
+                    .action {
+                        padding: 10px 20px;
+                        .lib-font-size(15);
+                        margin-left: 16px;
+                    }
+                }
+            }
+        }
+    }
+    div.field-tooltip {
+        .field-tooltip-content {
+            .lib-font-size(15);
+            padding: 10px;
+            &:before {
+                border-right-color: transparent;
+                border-bottom-color: #f2f2f2;
+            }
+            &::after {
+                border-right-color: transparent;
+                border-bottom-color: #f2f2f2;
+            }
+        }
+    }
+
+    .checkout-success {
+        .lib-font-size(17);
+    }
+    .checkout-onepage-success {
+        .page-main {
+            padding-top: 16px;
+            padding-bottom: 0;
+            .actions-toolbar {
+                .action.primary {
+                    .lib-font-size(17);
+                    min-width: 200px;
+                }
+            }            
+        }
+    }
+    #registration {
+        margin-top: 50px;
+        .lib-font-size(17);
+        .action.primary {
+            .lib-font-size(17);
+            min-width: 200px;
+            margin-top: 12px;
+            width: 100%;
+        }
+    }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .opc-wrapper {
+        &:extend(.abs-add-box-sizing-desktop-m all);
+        .lib-layout-column(2, 1, @checkout-wrapper__columns);
+        padding: 26px;
+    }
+
+    .checkout-onepage-success {
+        .print {
+            display: block;
+            float: right;
+            margin: 23px 0 0;
+        }
+    }
+}

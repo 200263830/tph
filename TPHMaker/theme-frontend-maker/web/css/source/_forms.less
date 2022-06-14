@@ -1,0 +1,245 @@
+// /**
+//  * Copyright © Magento, Inc. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+
+//
+//  Variables
+//  _____________________________________________
+
+@legend-border-bottom: 1px solid @color-gray-light6;
+@form-field__vertical-indent__desktop: 29px;
+@form-calendar-icon__color: @primary__color;
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .fieldset {
+        .lib-form-fieldset();
+
+        &:last-child {
+            margin-bottom: @indent__base;
+        }
+
+        > .field,
+        > .fields > .field {
+            .lib-form-field();
+            &.no-label {
+                > .label {
+                    .lib-visually-hidden();
+                    font-weight: 400;
+                }
+            }
+
+            &.choice {
+                .label {
+                    display: inline;
+                    font-weight: normal;
+                    margin: 0;
+                }
+            }
+
+            .label {
+                font-weight: @font-weight__regular;
+                .lib-font-size(16);
+                color: @color-maker-dark-blue;
+                .column:not(.main) & {
+                    font-weight: normal;
+                }
+            }
+
+            .field.choice {
+                margin-bottom: @indent__s;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+
+    .legend + .fieldset,
+    .legend + div {
+        clear: both;
+    }
+
+    .legend {
+        > span {
+            margin-right: @indent__xs;
+        }
+    }
+
+    fieldset.field {
+        border: 0;
+        padding: 0;
+    }
+
+    .field {
+        &.date {
+            .time-picker {
+                display: inline-block;
+                margin-top: @indent__s;
+                white-space: nowrap;
+            }
+        }
+
+        .message {
+            &.warning {
+                margin-top: @indent__s;
+            }
+        }
+    }
+
+    .select-styling() {
+        .lib-css(appearance, none, 1);
+        appearance: none;
+        background-size: 30px 60px;
+        text-indent: .01em;
+        text-overflow: '';
+
+        &::-ms-expand {
+            display: none;
+        }
+    }
+
+    input[type="text"], input[type="password"], input[type="url"], input[type="tel"], input[type="search"], input[type="number"], input[type*="date"], input[type="email"] {
+        .lib-font-size(16);
+        height: 40px;
+        border-radius: 4px;
+        border-color: @border-color__dark;        
+    }
+    input.mage-error, select.mage-error, textarea.mage-error {
+        border-color: @color-maker-red;
+    }
+    textarea {
+        .lib-font-size(16);
+        border-radius: 4px;
+        border-color: @border-color__dark;
+    }
+
+    select {
+        .lib-font-size(16);
+        .select-styling();
+        border-color: @border-color__dark;
+        border-radius: 4px;
+    }
+
+    select.admin__control-multiselect {
+        height: auto;
+    }
+
+    .field-error,
+    div.mage-error[generated] {
+        margin-top: 7px;
+        color: @color-maker-red;
+    }
+
+    .field-error {
+        .lib-form-validation-note();
+    }
+
+    .product-options-wrapper {
+        .date {
+            &.required {
+                div[for*='options'] {
+                    &.mage-error {
+                        display: none !important;
+                    }
+                }
+            }
+        }
+    }
+
+    //  TEMP
+
+    .field .tooltip {
+        .lib-tooltip(right);
+        .tooltip-content {
+            min-width: 200px;
+            white-space: normal;
+        }
+    }
+
+    input:focus ~ .tooltip .tooltip-content,
+    select:focus ~ .tooltip .tooltip-content {
+        display: block;
+    }
+
+    ._has-datepicker {
+        ~ .ui-datepicker-trigger {
+            .lib-button-reset();
+            .lib-icon-font(
+            @_icon-font-content: @icon-calendar,
+            @_icon-font-color: @primary__color__lighter,
+            @_icon-font-size: @icon-calendar__font-size,
+            @_icon-font-line-height: @icon-calendar__font-size,
+            @_icon-font-display: block,
+            @_icon-font-text-hide: true
+            );
+            display: inline-block;
+            margin-top: -4px;
+            vertical-align: middle;
+
+            &:focus {
+                box-shadow: none;
+                outline: 0;
+            }
+        }
+    }
+
+    .field.date,
+    .field-dob {
+        ._has-datepicker {
+            &:extend(.abs-field-date-input all);
+        }
+    }
+
+    //
+    //  Sidebar forms
+    //  ---------------------------------------------
+
+    .sidebar {
+        .fieldset {
+            margin: 0;
+
+            > .field:not(.choice) >,
+            .fields > .field {
+                &:not(:last-child) {
+                    margin: 0 0 @form-field__vertical-indent;
+                }
+
+                .label {
+                    margin: 0 0 4px;
+                    padding: 0 0 @indent__xs;
+                    text-align: left;
+                    width: 100%;
+                }
+
+                .control {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .legend {
+        .lib-css(border-bottom, @legend-border-bottom);
+    }
+}
+
+//
+//  Mobile
+//  _____________________________________________
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    input[type="text"], input[type="password"], input[type="url"], input[type="tel"], input[type="search"], input[type="number"], input[type*="date"], input[type="email"] {
+        height: 36px;
+    }
+}

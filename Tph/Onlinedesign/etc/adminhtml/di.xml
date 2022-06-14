@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category    TPH
+ * @package     Tph_Onlinedesign
+ *
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+    <type name="Magento\Sales\Block\Adminhtml\Order\View\Items">
+        <plugin name="canva_image_order_prepare_data_source_after" type="Tph\Onlinedesign\Plugin\Adminhtml\Canvaimage" sortOrder="100" />
+    </type>
+    <type name="Magento\Sales\Block\Adminhtml\Order\View\Items\Renderer\DefaultRenderer">
+        <plugin name="imagerenderer_order_prepare_data_source_before_around" type="Tph\Onlinedesign\Plugin\Adminhtml\AddRenderer"/>
+    </type>
+
+    <virtualType name="Magento\CatalogStaging\Ui\DataProvider\Product\Form\Modifier\Pool" type="Magento\Ui\DataProvider\Modifier\Pool">
+		<arguments>
+			<argument name="modifiers" xsi:type="array">
+				<item name="new-modifier-all" xsi:type="array">
+					<item name="class" xsi:type="string">Tph\Onlinedesign\Ui\DataProvider\Product\Form\Modifier\All</item>
+					<item name="sortOrder" xsi:type="number">71</item>
+				</item>
+			</argument>
+		</arguments>
+	</virtualType>
+	<virtualType name="Magento\Catalog\Ui\DataProvider\Product\Form\Modifier\Pool" type="Magento\Ui\DataProvider\Modifier\Pool">
+		<arguments>
+			<argument name="modifiers" xsi:type="array">
+				<item name="new-modifier-all" xsi:type="array">
+					<item name="class" xsi:type="string">Tph\Onlinedesign\Ui\DataProvider\Product\Form\Modifier\All</item>
+					<item name="sortOrder" xsi:type="number">71</item>
+				</item>
+			</argument>
+		</arguments>
+	</virtualType>
+	<virtualType name="Tph\Onlinedesign\Ui\DataProvider\Product\Form\Modifier\Pool" type="Magento\Ui\DataProvider\Modifier\Pool">
+		<arguments>
+			<argument name="modifiers" xsi:type="array">
+			</argument>
+		</arguments>
+	</virtualType>
+	<type name="Tph\Onlinedesign\Ui\DataProvider\Product\Form\Modifier\All">
+		<arguments>
+			<argument name="pool" xsi:type="object">Tph\Onlinedesign\Ui\DataProvider\Product\Form\Modifier\Pool</argument>
+		</arguments>
+	</type>
+	<virtualType name="Tph\Onlinedesign\Ui\DataProvider\Product\Form\Modifier\Pool">
+		<arguments>
+			<argument name="modifiers" xsi:type="array">
+				<item name="new-custom-option" xsi:type="array">
+					<item name="class" xsi:type="string">Tph\Onlinedesign\Ui\DataProvider\Product\Form\Modifier\CustomOptions</item>
+					<item name="sortOrder" xsi:type="number">72</item>
+				</item>
+			</argument>
+		</arguments>
+	</virtualType>
+</config>

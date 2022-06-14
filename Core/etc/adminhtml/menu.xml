@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+    	<add id="Tph_Core::core" title="TPH" module="Tph_Core" sortOrder="30" resource="Tph_Core::core"/>
+    </menu>
+</config>

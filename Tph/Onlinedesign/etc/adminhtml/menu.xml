@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Backend/etc/menu.xsd">
+    <menu>
+        <add id="Tph_Onlinedesign::canvas"
+             title="Canvas"
+             module="Tph_Onlinedesign"
+             sortOrder="30"
+             resource="Tph_Onlinedesign::canvas"
+             parent="Tph_Core::core"/>
+        <add id="Tph_Onlinedesign::configuration"
+             title="Configuration"
+             module="Tph_Onlinedesign"
+             sortOrder="40"
+             parent="Tph_Onlinedesign::canvas"
+             action="adminhtml/system_config/edit/section/canvas"
+             resource="Tph_Onlinedesign::configuration"/>
+        
+        <add id="Tph_Onlinedesign::add_row" title="Design Type" 
+             module="Tph_Onlinedesign" sortOrder="20" 
+             parent="Tph_Onlinedesign::canvas" 
+             action="tph_onlinedesign/items/" resource="Tph_Onlinedesign::items"/>
+
+        <add id="Tph_Onlinedesign::add_design_id" title="Canva Landing Page" 
+             module="Tph_Onlinedesign" sortOrder="20" 
+             parent="Tph_Onlinedesign::canvas" 
+             action="tph_onlinedesign/designid/" resource="Tph_Onlinedesign::add_design_id"/>     
+    </menu>
+</config>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @category    TPH
+ * @package     Tph_Onlinedesign
+ * @var $block \Tph\Onlinedesign\Block\Catalog\Product\View
+ * Declarative schema to create table
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="tph_design_type" resource="default" engine="innodb" comment="Tph Canvas Table">
+        <column xsi:type="int" name="id" padding="11" unsigned="false" nullable="false" identity="true" comment="ID" />
+        <column xsi:type="varchar" name="design_title" nullable="false" length="255" comment="Design Title" />
+        <column xsi:type="varchar" name="design_type" nullable="false" length="255" comment="Design Type" />
+        <column xsi:type="smallint" name="status" nullable="true" comment="Status" identity="false"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Updated At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id" />
+        </constraint>
+    </table>
+    <table name="tph_design_id" resource="default" engine="innodb" comment="Tph Canvas Table">
+        <column xsi:type="int" name="id" padding="11" unsigned="false" nullable="false" identity="true" comment="ID" />
+        <column xsi:type="varchar" name="design_id" nullable="false" length="255" comment="Design Id" />
+        <column xsi:type="varchar" name="product_id" nullable="false" length="255" comment="Product Id" />
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Updated At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id" />
+        </constraint>
+    </table>
+    <table name="quote_item" resource="default" engine="innodb">
+        <column xsi:type="varchar" name="custom_image" nullable="true" length="255" comment="Canva Image"/>
+        <column xsi:type="varchar" name="design_type" nullable="true" length="255" comment="Design Type"/>
+        <column xsi:type="varchar" name="design_id" nullable="true" length="255" comment="Design Id"/>
+        <column xsi:type="varchar" name="canva_design_id" nullable="true" length="255" comment="Canva Design Id"/>
+        <column xsi:type="varchar" name="artwork_id" nullable="true" length="255" comment="Artwork id"/>
+        <column xsi:type="varchar" name="canva_type" nullable="true" length="255" comment="Canva Type 1.Catalogue 2.Canva "/>
+    </table>
+
+    <table name="sales_order_item" resource="default" engine="innodb">
+        <column xsi:type="varchar" name="custom_image" nullable="true" length="255" comment="Canva Image"/>
+        <column xsi:type="varchar" name="design_type" nullable="true" length="255" comment="Design Type"/>
+        <column xsi:type="varchar" name="design_id" nullable="true" length="255" comment="Design Id"/>
+        <column xsi:type="varchar" name="artwork_id" nullable="true" length="255" comment="Artwork id"/>
+    </table>
+
+    <table name="quote" resource="default" engine="innodb">
+        <column xsi:type="text" name="canva_image" nullable="true" comment="Canva Image"/>
+        <column xsi:type="text" name="canva_button_image" nullable="true" comment="Canva button Image"/>
+    </table>
+    <table name="catalog_product_option_type_value" resource="default" engine="innodb">
+        <column xsi:type="varchar" name="category" nullable="true" comment="Category canva Id"/>
+        <column xsi:type="varchar" name="height" nullable="true" comment="Height"/>
+        <column xsi:type="varchar" name="width" nullable="true" comment="Width"/>
+    </table>
+</schema>

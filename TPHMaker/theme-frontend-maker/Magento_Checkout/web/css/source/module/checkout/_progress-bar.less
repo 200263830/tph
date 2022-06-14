@@ -1,0 +1,124 @@
+// /**
+//  * Copyright © Magento, Inc. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+
+//
+//  Variables
+//  _____________________________________________
+
+@checkout-progress-bar__font-size: 18px;
+@checkout-progress-bar__font-weight: @font-weight__light;
+@checkout-progress-bar__margin: 36px;
+
+@checkout-progress-bar-item__background-color: @color-gray-middle1;
+@checkout-progress-bar-item__border-radius: 6px;
+@checkout-progress-bar-item__color: @color-gray40;
+@checkout-progress-bar-item__margin: @indent__s;
+@checkout-progress-bar-item__transition: background .3s;
+@checkout-progress-bar-item__width: 185px;
+
+@checkout-progress-bar-item__active__background-color: @active__color;
+@checkout-progress-bar-item__active__color: @primary__color;
+@checkout-progress-bar-item__active__font-weight: @font-weight__semibold;
+@checkout-progress-bar-item__complete__color: @link__color;
+@checkout-progress-bar-item__hover__background-color: darken(@checkout-progress-bar-item__background-color, 5%);
+
+@checkout-progress-bar-item-element__height: @checkout-progress-bar-item-element__width;
+@checkout-progress-bar-item-element__width: 38px;
+
+@checkout-progress-bar-item-element-inner__background-color: @page__background-color;
+@checkout-progress-bar-item-element-inner__border-color: @color-gray80;
+@checkout-progress-bar-item-element-inner__color: @primary__color;
+@checkout-progress-bar-item-element-inner__height: @checkout-progress-bar-item-element-inner__width;
+@checkout-progress-bar-item-element-inner__width: @checkout-progress-bar-item-element__width - ( @checkout-progress-bar-item-element-outer-radius__width*2 );
+@checkout-progress-bar-item-element-inner__active__border-color: @active__color;
+@checkout-progress-bar-item-element-inner__active__content: @icon-checkmark;
+
+@checkout-progress-bar-item-element-outer-radius__width: 6px;
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+
+    //
+    //  Checkout Progress Bar
+    //  ---------------------------------------------
+
+    .opc-progress-bar {
+        &:extend(.abs-reset-list all);
+        counter-reset: my-awesome-counter;
+        .lib-css(margin, 0 0 @checkout-progress-bar__margin);
+        counter-reset: i;
+        display: flex;
+        justify-content: space-between;
+        width: 66.66666667%;
+        padding-right: 30px;
+        box-sizing: border-box;     
+        .opc-progress-bar-item {
+            counter-increment: my-awesome-counter;
+            &:before {
+                content: counter(my-awesome-counter) ".";
+            }
+        }
+    } 
+
+    .opc-progress-bar-item {
+        width: 48%;
+        display: inline-block;
+        border-bottom: solid 1px @border-color__light;
+        position: relative;
+        text-align: center;
+        vertical-align: top;
+        .lib-font-size(24);
+        color: @color-maker-gray;
+        font-family: @font-family-name__makerBL;
+        line-height: 3;
+        &._complete {
+            cursor: pointer;
+            color: @color-maker-sucess;
+            border-color: @color-maker-sucess;
+            &:after {
+                content: "\e610";
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                color: inherit;
+                font-family: 'luma-icons';
+                margin: 0 0 0 5px;
+                vertical-align: middle;
+                display: inline-block;
+                font-weight: normal;
+                overflow: hidden;
+                speak: none;
+                text-align: center;
+            }
+        }
+
+        &._active {
+            color: @color-maker-dark-blue;
+            border-color: @color-maker-dark-blue;
+            border-width: 4px;
+        }
+    }
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .opc-progress-bar {
+        width: 100%;
+        margin-bottom: 22px;
+        padding: 0;
+    }
+    .opc-progress-bar-item {
+        width: 49%;
+        .lib-font-size(13);
+    }
+    .opc-progress-bar-item._active {
+        border-width: 2px;
+    }
+}

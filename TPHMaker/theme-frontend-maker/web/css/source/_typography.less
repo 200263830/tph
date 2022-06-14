@@ -1,0 +1,95 @@
+//
+//  Typography
+//  ---------------------------------------------
+
+//
+//  Desktop
+//  _____________________________________________
+& when (@media-common = true) {
+    body {
+        .lib-css(background-color, @page__background-color);
+        -webkit-font-smoothing: antialiased;
+        font-size: @font-size-primary;
+    }
+
+    h1, h2, h3, h4 {
+        text-transform: uppercase;
+        font-weight: @font-weight__regular;
+        font-family: @font-family-name__makerBK;
+    }
+    h3 {
+        .lib-font-size(30);
+    }
+    h4 {
+        .lib-font-size(24);
+    }
+    .block {
+        .title.block-title {
+            font-size: @h2__font-size;
+            text-align: center;
+        }
+    }
+
+    b, strong {
+        font-weight: @font-weight__regular;
+        font-family: @font-family-name__makerBL;
+    }
+
+    .items {
+        margin: 0;
+        padding: 0;
+        list-style: none none;
+    }
+
+    dt {
+        font-weight: @font-weight__regular;
+    }
+
+    //
+    //  Tablet
+    //  _____________________________________________
+    @media only screen and (min-width: 768px) and (max-width: 1199px) {        
+        h1 {
+            .lib-font-size(30);
+        }
+        h2 {
+            .lib-font-size(30);
+        }
+        h3 {
+            .lib-font-size(24);
+        }
+        h4 {
+            .lib-font-size(20);
+        }
+        .block {
+            .title.block-title {
+                .lib-font-size(30);
+            }
+        }
+    }
+}
+//
+//  Mobile
+//  _____________________________________________
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    body {
+        .lib-font-size(15);
+    }
+    h1 {
+        .lib-font-size(22);
+    }
+    h2 {
+        .lib-font-size(22);
+    }
+    h3 {
+        .lib-font-size(18);
+    }
+    h4 {
+        .lib-font-size(16);
+    }
+    .block {
+        .title.block-title {
+            .lib-font-size(24);
+        }
+    }
+}

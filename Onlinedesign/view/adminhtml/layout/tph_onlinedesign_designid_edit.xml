@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category    TPH
+ * @package     Tph_Onlinedesign
+ * 
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+    <update handle="editor"/>
+    <body>
+        <referenceContainer name="left">
+            <block class="Tph\Onlinedesign\Block\Adminhtml\Designid\Edit\Tabs" name="tph_onlinedesign_designid_edit_tabs">
+                <block class="Tph\Onlinedesign\Block\Adminhtml\Designid\Edit\Tab\Main" name="tph_onlinedesign_designid_edit_tab_main"/>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">main_section</argument>
+                    <argument name="block" xsi:type="string">tph_onlinedesign_designid_edit_tab_main</argument>
+                </action>
+            </block>
+        </referenceContainer>
+        <referenceContainer name="content">
+            <block class="Tph\Onlinedesign\Block\Adminhtml\Designid\Edit" name="designid_edit"/>
+        </referenceContainer>
+    </body>
+</page>

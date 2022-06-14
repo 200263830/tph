@@ -1,0 +1,377 @@
+// /**
+//  * Copyright © Magento, Inc. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+
+//
+//  Variables
+//  _____________________________________________
+
+@checkout-payment-method-title__border: @checkout-shipping-method__border;
+@checkout-payment-method-title__padding: @checkout-shipping-method__padding;
+@checkout-payment-method-title-mobile__padding: 15px;
+
+@checkout-payment-method-content__padding__xl: 22px;
+
+@checkout-billing-address-details__line-height: 27px;
+@checkout-billing-address-details__padding: 0 0 0 40px;
+@checkout-billing-address-form__max-width: @checkout-shipping-address__max-width;
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .checkout-payment-method {
+        .step-title {
+            border-bottom: 0;
+            margin-bottom: 24px;
+        }
+        .step-content {
+            margin-bottom: 0;
+        }
+        .payment-method {
+            position: relative;
+            max-width: 800px;
+            &:first-child {
+                .payment-method-title {
+                    border-top: 0;
+                }
+            }
+
+            &._active {
+                .payment-method-content {
+                    display: block;
+                }
+            }
+            
+            form {
+                &.form-purchase-order {
+                    margin-bottom: 15px;
+
+                    .input-text {
+                        width: 40%;
+                    }
+                }
+            }
+            .payment-method-title {
+                .label {
+                    .lib-font-size(20);
+                    vertical-align: middle;
+                    display: inline-block;
+                    width: 100%;
+                    box-sizing: border-box;
+                    padding: 26px 0 26px 75px;
+                    cursor: pointer;
+                    a {
+                        color: @color-maker-dark-blue;
+                    }
+                }
+                input[type="radio"] {
+                    top: -2px;
+                    display: inline-block !important;
+                    vertical-align: middle;
+                    position: absolute;
+                    left: 26px;
+                    top: 50%;
+                    transform: translate(0,-50%);
+                    -webkit-transform: translate(0,-50%);
+                }
+            }
+            &._active {
+                .payment-method-title {
+                    border: solid 2px @color-maker-dark-blue;
+                }
+            }
+        }
+
+        .payment-method-content {
+            > .actions-toolbar {
+                text-align: center;
+                margin-top: 26px;
+                > .primary {
+                    float: none;
+                    .action {           
+                        &.primary {
+                            .lib-font-size(22);
+                            font-weight: @font-weight__regular;
+                            padding: 14px 30px;
+                        }
+                    }
+                }
+            }
+            /**
+             * @codingStandardsIgnoreStart
+             */
+            #po_number {
+                margin-bottom: 20px;
+            }
+            //  @codingStandardsIgnoreEnd
+        }
+
+        .payment-method-title {
+            margin: -1px 0 0 0;
+            border: solid 1px @border-color__dark;
+            position: relative;
+            .payment-icon {
+                display: inline-block;
+                margin-right: @indent__xs;
+                vertical-align: middle;
+            }
+
+            .action-help {
+                display: inline-block;
+                margin-left: @indent__xs;
+            }
+        }
+
+        .payment-method-content {
+            display: none;
+            padding: 30px 0;
+            .fieldset {
+                &:not(:last-child) {
+                    margin: 0 0 @indent__base;
+                }
+            }
+        }
+
+        .payment-group {
+            & + .payment-group {
+                .step-title {
+                    margin: @indent__base 0 0;
+                }
+            }
+        }
+
+        .field-select-billing,
+        .billing-address-form {
+            .lib-css(max-width, @checkout-billing-address-form__max-width);
+        }
+
+        .billing-address-same-as-shipping-block {
+            margin: 0 0 @indent__s;
+            color: @color-maker-dark-gray;
+            .lib-font-size(18);
+            padding-left: 5px;
+        }
+
+        .checkout-billing-address {
+            margin: 0 0 @indent__base;
+
+            .primary {
+                .action-update {
+                    margin-right: 0;
+                    .lib-font-size(18);
+                    color: @color-maker-white;
+                    font-weight: @font-weight__regular;
+                    padding: 10px 20px;                    
+                }
+            }
+
+            .action-cancel {
+                &:extend(.abs-action-button-as-link all);
+            }
+
+            .billing-address-details {
+                .lib-css(line-height, @checkout-billing-address-details__line-height);
+                .lib-css(padding, @checkout-billing-address-details__padding);
+                color: @color-maker-dark-gray;
+                .lib-font-size(18);
+            }
+            
+        }
+
+        .payment-method-note {
+            & + .checkout-billing-address {
+                margin-top: @indent__base;
+            }
+        }
+
+        .field-select-billing {
+            > .label {
+                &:extend(.abs-visually-hidden all);
+            }
+        }
+
+        .payment-method-iframe {
+            background-color: transparent;
+            display: none;
+            width: 100%;
+        }
+
+        .no-payments-block {
+            margin: @indent__base 0;
+        }
+
+        .payments {
+            .legend {
+                &:extend(.abs-visually-hidden all);
+            }
+        }
+    }
+    .payment-method-note {
+        text-align: center;
+        .lib-font-size(20);
+        color: @color-maker-dark-blue;
+    }
+    .opc-wrapper {
+        br {
+            display: none !important;
+        }
+    }
+
+    //
+    // Tablet
+    //  _____________________________________________
+    @media only screen and (min-width: 768px) and (max-width: 1199px) {
+        .checkout-payment-method {
+            .payment-method-content {
+                > .actions-toolbar {
+                    > .primary {
+                        .action.primary {
+                            .lib-font-size(18);
+                            padding: 12px 26px;
+                        }
+                    }
+                }
+            }
+            .payment-method {
+                .payment-method-title {
+                    .label {
+                        .lib-font-size(18);
+                        padding: 20px 0 20px 64px;
+                    }
+                    input[type="radio"] {
+                        left: 22px;
+                    }
+                }
+            }
+            ul.credit-card-types {
+                top: 19px;
+                right: 16px;
+            } 
+        }
+        .payment-method-note {
+            .lib-font-size(18);
+        }        
+    }
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .opc-wrapper {
+        margin-bottom: 20px;
+    }
+    #rootways_bamboratoken_option-form {
+        margin-top: 20px;
+    }
+    .checkout-payment-method {
+        .step-title {
+            margin-bottom: 20px;
+        }
+        .credit-card-types {
+            position: relative;
+            top: 0;
+            left: 0;
+        }
+        .payment-method-content {
+            padding: 20px 0;
+            > .actions-toolbar {
+                margin-top: 20px;
+                > .primary {
+                    .action.primary {
+                        padding: 11px 20px;
+                        .lib-font-size(18);
+                    }
+                }
+            }
+        }        
+
+        .checkout-billing-address {
+            .action-cancel {
+                margin-top: @indent__s;
+            }            
+            .billing-address-details {
+                .lib-font-size(15);
+                line-height: 22px;
+                padding: 0;
+            }
+            .primary {
+                .action-update {
+                    .lib-font-size(16);
+                }
+            }
+        }
+        .billing-address-same-as-shipping-block {
+            .lib-font-size(15);
+        }
+        .payment-option-title {
+            .action-toggle {
+                .lib-font-size(15);
+                &:after {
+                    .lib-font-size(13);
+                    margin: 0 0 0 8px;
+                }
+            }
+        }
+        .payment-method {
+            .payment-method-title {
+                .label {
+                    padding: 14px 0 14px 44px;
+                }
+                input[type="radio"] {
+                    left: 12px;
+                    top: 47%;
+                }
+                .payment-icon {
+                    max-width: 40px;
+                    margin-right: 4px;
+                    margin-bottom: 4px;
+                }
+            }            
+        }
+        .payment-method-note {
+            .lib-font-size(16);
+        }
+    }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .checkout-payment-method {
+        .actions-toolbar {
+            .primary {
+                margin: 0;
+            }
+        }
+
+        .fieldset {
+            > .field-select-billing {
+                > .control {
+                    float: none;
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    .checkout-billing-address {
+        .action-update {
+            float: right;
+        }
+
+        .actions-toolbar {
+            .action-cancel {
+                .lib-font-size(18);
+                margin: 8px @indent__base 0 0;
+                color: @color-maker-dark-gray;
+            }
+        }
+    }
+}

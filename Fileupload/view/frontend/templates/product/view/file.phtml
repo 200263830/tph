@@ -1,0 +1,251 @@
+<?php
+
+/**
+ * @category    TPH
+ * @package     Tph_Fileupload
+ * @description Observer to add image in cart
+ */
+
+
+/* @var $block \Magento\Catalog\Block\Product\View\Options\Type\File */
+/** @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer */
+//echo $item_id = (int)$block->getParam('id');
+$blockObj= $block->getLayout()->createBlock('Tph\Fileupload\Block\Catalog\Product\View');
+$currentProduct = $block->getProduct();
+$currentProduct->getData('canva_size_product');
+$item_id = (int)$blockObj->getParam()->getParam('id');
+$itemId = $blockObj->getCartItem($item_id);
+$addtion_da = $blockObj->getAddtionaOption($item_id);
+if(!empty($addtion_da)){
+  $addtion_da = $blockObj->getAddtionaOption($item_id);
+}
+
+$addtion = "";
+$addtionv = "";
+
+if(!empty($addtion_da)){
+  $addtion_da = json_decode($addtion_da,true);
+  $ad = $addtion_da[0];
+  if(!empty($ad['url'])){
+    $addtion = $ad['url'];
+   }
+   if(!empty($ad['value'])){
+    $addtionv = $ad['value'];
+   }
+
+}
+?>
+<?php $_option = $block->getOption(); ?>
+<?php $_fileInfo = $block->getFileInfo(); ?>
+<?php $_fileExists = $_fileInfo->hasData(); ?>
+<?php $_fileName = 'options_' . $block->escapeHtmlAttr($_option->getId()) . '_file'; ?>
+<?php $_fieldNameAction = $_fileName . '_action'; ?>
+<?php $_fieldValueAction = $_fileExists ? 'save_old' : 'save_new'; ?>
+<?php $_fileNamed = $_fileName . '_name'; ?>
+<?php $class = ($_option->getIsRequire()) ? ' required' : ''; ?>
+
+<div class="field file<?= /* @noEscape */ $class ?>">
+    <label class="label" for="<?= /* @noEscape */ $_fileName ?>" id="<?= /* @noEscape */ $_fileName ?>-label">
+        <span><?= $block->escapeHtml($_option->getTitle()) ?></span>
+        <?= /* @noEscape */ $block->getFormattedPrice() ?>
+    </label>
+    <?php if ($_fileExists):?>
+    <div class="control">
+        <span class="<?= /* @noEscape */ $_fileNamed ?>"><?= $block->escapeHtml($_fileInfo->getTitle()) ?></span>
+        <a href="#" class="label" id="change-<?= /* @noEscape */ $_fileName ?>" >
+            <?= $block->escapeHtml(__('Change')) ?>
+        </a>
+        <?= /* @noEscape */ $secureRenderer->renderEventListenerAsTag(
+            'onclick',
+            'event.preventDefault()',
+            'a#change-' ./* @noEscape */ $_fileName
+        ) ?>
+        <?php if (!$_option->getIsRequire()):?>
+            <input type="checkbox" id="delete-<?= /* @noEscape */ $_fileName ?>" />
+            <span class="label"><?= $block->escapeHtml(__('Delete')) ?></span>
+        <?php endif; ?>
+    </div>
+    <?php endif; ?>
+    <div class="control" id="input-box-<?= /* @noEscape */ $_fileName ?>"
+             data-mage-init='{"priceOptionFile":{
+                "fileName":"<?= /* @noEscape */ $_fileName ?>",
+                "fileNamed":"<?= /* @noEscape */ $_fileNamed ?>",
+                "fieldNameAction":"<?= /* @noEscape */ $_fieldNameAction ?>",
+                "changeFileSelector":"#change-<?= /* @noEscape */ $_fileName ?>",
+                "deleteFileSelector":"#delete-<?= /* @noEscape */ $_fileName ?>"}
+             }'>
+       <?php /*  <input type="file"
+               name="<?= $_fileName ?>"
+               id="<?=  $_fileName ?>"
+               class="product-custom-option<?= $_option->getIsRequire() ? ' required' : '' ?>"
+            <?= $_fileExists ? 'disabled="disabled"' : '' ?> /> */ ?>
+
+        <?php if ($_option->getFileExtension()):?>
+            <p class="note">
+                <?= $block->escapeHtml(__('Upload your file')) ?>
+                <strong><?= $block->escapeHtml(__('If you have a complete design, you can upload here. Max 100mb')) ?></strong>
+                <!-- <strong><?= $block->escapeHtml($_option->getFileExtension()) ?></strong> -->
+
+            </p>
+        <?php endif; ?>
+        <?php if ($_option->getImageSizeX() > 0):?>
+            <p class="note">
+                <?= $block->escapeHtml(__('Maximum image width')) ?>: <strong><?= (int)$_option->getImageSizeX()
+                ?> <?= $block->escapeHtml(__('px.')) ?></strong>
+            </p>
+        <?php endif; ?>
+        <?php if ($_option->getImageSizeY() > 0):?>
+            <p class="note">
+                <?= $block->escapeHtml(__('Maximum image height')) ?>: <strong><?= (int)$_option->getImageSizeY()
+                ?> <?= $block->escapeHtml(__('px.')) ?></strong>
+            </p>
+        <?php endif; ?>
+
+        <input type="hidden" name="<?= /* @noEscape */ $_fileName ?>" id="<?= /* @noEscape */ $_fileName ?>"
+               class="product-custom-option<?= $_option->getIsRequire() ? ' required' : '' ?>"
+            <?= $_fileExists ? 'disabled="disabled"' : '' ?> role="uploadcare-uploader"
+             data-min-width="500"  data-min-height="500" />
+
+            <input type="text" name="uploadcare" value="<?= $addtion; ?>" id="upload_option"  class="swatch-input" data-canva-size="<?= $currentProduct->getData('canva_size_product'); ?>" data-upload-valid="<?= /* Validation uploadcare */ $currentProduct->getData('upload_valid'); ?>"  >
+            <input type="hidden" name="uploadcare_type" value="<?= $addtionv; ?>" id="uploadcare_type" >
+
+        <input type="hidden" name="<?= /* @noEscape */ $_fieldNameAction ?>"
+               value="<?= /* @noEscape */ $_fieldValueAction ?>" />
+    </div>
+    <div for="upload_option" generated="true" class="mage-error" id="upload_option-error" style="display: none;">Please upload Your file!</div>
+    <?= $_fileExists ?
+        /* @noEscape */ $secureRenderer->renderStyleAsTag(
+            'display:none',
+            '#input-box-' . /* @noEscape */ $_fileName
+        ) : '' ?>
+</div>
+<script type="text/javascript">
+  UPLOADCARE_PUBLIC_KEY = 'ceaff3ba03d6196aecd0';
+  //UPLOADCARE_CROP = 'free,1:1,4:3,16:9'
+  UPLOADCARE_EFFECTS = 'all'
+  UPLOADCARE_PREFERRED_TYPES = 'image,pdf'
+</script>
+<script>
+require([
+    'Tph_Fileupload/js/uploadcaretab',
+    'https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js',
+    'Tph_Fileupload/js/uploadsize',
+], function (uploadcareTabEffects,uploadcare) {
+    'use strict';
+    console.log('js loaded');
+
+jQuery(".field.file").on('click', function(event){
+  var cropsize = jQuery('.product-custom-option').attr('data-crop');
+    widget.openDialog({
+      crop: cropsize
+    })
+ });
+
+// var sku  = "";
+// var arr = ["Custom Ball Caps","Custom Knitted Toque"];
+
+// var skucompare = jQuery.inArray( sku, arr );
+
+// if(skucompare == '-1')
+// {
+//     jQuery("#upload_option").addClass("product-custom-option-required");
+//     jQuery.validator.addMethod(
+//         'product-custom-option-required', function (value) {
+//             if(value) return true;
+//             else return false;
+//         }, jQuery.mage.__('Please select/upload Your file!'));
+// }
+
+uploadcare.registerTab('preview', uploadcareTabEffects);
+var option_id = "<?php echo $_option->getId() ?>";
+var widget = uploadcare.Widget('#input-box-options_'+option_id+'_file input')
+widget.onDialogOpen(dialog => {
+  dialog.fileColl.onAdd.add(file => {
+    console.log("File added", file)
+    setTimeout(function () {
+      console.log(12);
+          jQuery('[aria-label="Crop"]').trigger('click');
+        jQuery('[role=uploadcare-uploader]').each(function() {
+            var input = jQuery(this);
+            if (!input.data('minWidth') && !input.data('minHeight')) {
+                return
+            }
+            var widgetnew = uploadcare.Widget(input);
+            console.log(widgetnew);
+            widgetnew.validators.push(minDimensions(input.data('minWidth'), input.data('minHeight')))
+        });
+     },5000);
+  });
+  });
+
+//Code for the warning message
+
+/*jQuery('[role=uploadcare-uploader]').each(function() {
+    var input = jQuery(this)
+
+    if (!input.data('minWidth') && !input.data('minHeight')) {
+      return
+    }
+    var widget = uploadcare.Widget(input)
+
+    widget.validators.push(minDimensions(input.data('minWidth'), input.data('minHeight')))
+  })*/
+
+  widget.onUploadComplete(function(info) {
+
+     /** Hide the canva **/
+     jQuery('.canva-design-button').hide();
+     jQuery(".field.file").addClass('file-uploaded');
+     jQuery('#options_'+option_id+'_text').val(info.name);
+     jQuery('#upload_option').attr('value', info.cdnUrl);
+     jQuery("#product-canva-image").val("");
+
+     if(info.mimeType == "image/png" || info.mimeType == "image/jpg" || info.mimeType == "image/jpeg"){
+      //jQuery('.fotorama__active .fotorama__img').attr('src', info.cdnUrl);
+      //jQuery('.fotorama__img--full').attr('src', info.cdnUrl);
+         var gallery = jQuery('[data-gallery-role=gallery-placeholder]').data('gallery');
+         var images = gallery.returnCurrentImages()
+         images.splice(1)
+         images.push({
+             thumb: info.cdnUrl,
+             caption: "XYZ",
+             position: 2
+         });
+         gallery.updateData(images)
+     }
+
+     if(info.mimeType == "application/pdf"){
+       jQuery(".note").text("pdf uploaded!");
+      }else{
+      jQuery(".note").text("File uploaded!");
+     }
+      jQuery("#uploadcare_type").val([info.name,info.mimeType,info.size]);
+     jQuery('.input-text.product-custom-option').hide();
+
+  })
+});
+function minDimensions(width, height) {
+
+    var wi = jQuery(".uploadcare--media__image");
+    var imageHeight = `${wi.height()}`;
+    var imageWidth = `${wi.width()}`;
+
+    if (imageHeight === null) {
+        return
+    }
+
+    var heightExceeded = height && imageHeight < height
+
+    if (width && imageWidth < width) {
+        if (heightExceeded) {
+            jQuery(".uploadcare--panel__content").append('<div id="warning-message" style="color: red; text-align: center;margin-bottom: 10px;" class="warning-message">Notice: This image has low resolution !</div>');
+            setTimeout(function(){ jQuery(".warning-message").remove(); }, 7000);
+        }
+        else {
+            jQuery(".uploadcare--panel__content").append('<div id="warning-message" style="color: red; text-align: center;margin-bottom: 10px;" class="warning-message">Notice: This image has low resolution ! </div>');
+            setTimeout(function(){ jQuery(".warning-message").remove(); }, 7000);
+        }
+    }
+
+}
+</script>

@@ -1,0 +1,81 @@
+<?php
+/** @var Tph\Onlinedesign\Block\Customimage\CartItemImageBlock $block */
+/* File: Tph\Onlinedesign/view/frontend/templates/product_image.phtml */
+/**
+ * @category    TPH
+ * @package     Tph_Onlinedesign
+ *
+ */
+$quote = $block->getCartDetail();
+$baseUrl = $block->getBaseUrl();
+$mediaUrl = $block->getMediaUrl();
+$api_key = $block->getApiKey();
+$item = $block->getItem();
+$blockObj= $block->getLayout()->createBlock('Tph\Onlinedesign\Block\Canvapage');
+$sessionId = $blockObj->getSessionId();
+$blockObj->getAutoAuthToken();
+$init = new CanvaInit();
+$AutoAuthToken = $init->getAutoAuthToken($sessionId);
+$canvaImage = $quote->getData('canva_image');
+$canvaImage = json_decode($canvaImage,true);
+$pid = $item->getProductId();
+$_SESSION[$pid."_preview_image"]=0;
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$productData = $objectManager->get('Magento\Quote\Model\Quote\Item')->load($item->getData('item_id'),'parent_item_id');
+
+$product = $this->getLoadProduct($productData->getProductId());
+$product = $blockObj->getLoadProduct($pid);
+$attributeId = $product->getData('product_design_id');
+if(!empty($canvaImage)) {
+    // $canvaDesinId = (array_search($attributeId, array_column($canvaImage, 'productId')) !== false)
+    //     ? $canvaImage[$attributeId]['designId'] : '';
+    $canvaDesinId = $item->getData('canva_design_id');
+}
+if ($quote->getItemsCount() > 0) {
+    if($item->getProductType()== "configurable"){
+        $image = $productData->getCustomImage();
+        $designType = $productData->getDesignType();
+        $designId = $productData->getDesignId();
+        $pidc = $productData->getProductId();
+        $canvaDesinId = $productData->getData('canva_design_id');
+    }else {
+        $image = $item->getCustomImage();
+        $designType = $item->getDesignType();
+        $designId = $item->getDesignId();
+        $pidc = $item->getProductId();
+    }
+    $pType = $item->getProductType();
+    if(!empty($designId)){?>
+    <div class="canva-image">
+      <span data-edit="1" data-button-size="small"
+              data-button-theme="default"
+              data-api-key="<?php echo $api_key; ?>"
+              class="canva-design-button" id="canva-design-button" data-url="<?php echo $baseUrl; ?>"
+              data-design-id="<?php echo $designId; ?>" style="margin-bottom: 28px;" data-product-type="<?= $pType; ?>"
+              data-editor-file-type="jpg" data-productId="<?= $pidc; ?>" data-on-design-publish="onDesignPublishCallback" ><?php echo __(
+                'Edit Design'
+            ); ?></span>
+
+    </div>
+ <script type="text/x-magento-init">
+        {
+            "*": {
+                "Tph_Onlinedesign/js/design": {}
+            }
+        }
+</script> <?php } ?>
+   <?php if(!empty($canvaImage) && array_search($attributeId, array_column($canvaImage, 'productId')) !== false) {
+    if(!empty($canvaDesinId)) {
+        $canvaDesinId = (!empty($canvaDesinId ))?$canvaDesinId:'';
+            $productSizeOptionId = (!empty($canvaImage[$attributeId]['productSizeOptionId']))?$canvaImage[$attributeId]['productSizeOptionId']:'';
+        $productId = $canvaImage[$attributeId]['productId'];  ?>
+    <a class="button tbh-edit-design" href="#" data-url="<?php echo $baseUrl; ?>" data-edit="1" data-design-id="<?= $canvaDesinId ?>" data-size-option="<?= $productSizeOptionId; ?>" data-product-id="<?= $productId; ?>" id="edit-design" data-pId="<?= $pidc; ?>" data-api-key="<?php echo $api_key; ?>" data-auth-token="<?= $AutoAuthToken;?>" > Edit Design</a>
+    <script type="text/x-magento-init">
+        {
+            "*": {
+                "Tph_Onlinedesign/js/canvacart": {}
+            }
+        }
+    </script>  
+    <?php }} ?>
+    <?php } ?>

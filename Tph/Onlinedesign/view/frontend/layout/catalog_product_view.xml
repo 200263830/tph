@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category    TPH
+ * @package     Tph_Onlinedesign
+ * 
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <script src="https://sdk.canva.com/partnership.js" src_type="url"/>
+    </head>  
+    <body>
+       <referenceBlock name="product.info.form.content">
+            <block class="Tph\Onlinedesign\Block\Catalog\Product\View" name="catalog.product.view.extrablock"
+                   as="extra_options" before="-" template="Tph_Onlinedesign::catalog/product/view.phtml"
+                   ifconfig="canvas/general/enable" cacheable="false" />
+      </referenceBlock>
+      <referenceBlock name="product.info.options.wrapper">
+           <block class="Tph\Onlinedesign\Block\Catalog\Product\View" name="canva.button.product.simple"
+                       as="extra_options_new" after="product.info.options.file" template="Tph_Onlinedesign::catalog/product/view.phtml"
+                       ifconfig="canvas/general/enable" cacheable="false" />
+
+      </referenceBlock>
+      <referenceBlock name="product.info.options.wrapper">
+         <block class="Tph\Onlinedesign\Block\Catalog\Product\View"  name="category.product.mwishlist" template="Tph_Onlinedesign::catalog/product/sizechart.phtml" before="product.info.options.swatches">
+         </block>
+    </referenceBlock>
+    </body>
+</page>

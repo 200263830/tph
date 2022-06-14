@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!--
+    /**
+    * @category    TPH
+    * @package     Tph_Onlinedesign
+    *
+    */
+-->
+<page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <script src="https://sdk.canva.com/partnership.js" src_type="url"/>
+        <css src="Tph_Onlinedesign::css/canva.css"/>
+    </head>
+   <referenceContainer name="content">
+        <block class="Tph\Onlinedesign\Block\Canvapage" name="onlinedesign" template="Tph_Onlinedesign::index.phtml"/>
+    </referenceContainer>
+    <referenceBlock name="navigation.sections" remove="true" />
+    <referenceBlock name="catalog.compare.sidebar" remove="true"/>
+    <referenceBlock name="page.main.title" remove="true"/>
+    <referenceBlock name="wishlist_sidebar" remove="true" />
+    <referenceContainer name="footer" remove="true"/>
+    <referenceContainer name="form.subscribe" remove="true"/>
+    <referenceContainer name="copyright" remove="true"/>
+   <!-- <referenceContainer name="header.main">
+        <block class="Magento\Cms\Block\Block" name="free_shipping">
+            <arguments>
+                <argument name="block_id" xsi:type="string">free_shipping</argument>
+            </arguments>
+        </block>
+    </referenceContainer>
+    <move element="free_shipping" destination="header.container" before="-" />-->
+</page>

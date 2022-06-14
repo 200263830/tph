@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<virtualType name="TphOnlinedesignGridFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+		<arguments>
+			<argument name="appliers" xsi:type="array">
+				<item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+				<item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+			</argument>
+		</arguments>
+	</virtualType>
+	<virtualType name="TphOnlinedesignGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+		<arguments>
+			<argument name="collection" xsi:type="object" shared="false">Tph\Onlinedesign\Model\ResourceModel\Canvas\Collection</argument>
+			<argument name="filterPool" xsi:type="object" shared="false">TphOnlinedesignGridFilterPool</argument>
+		</arguments>
+	</virtualType>
+	<virtualType name="Tph\Onlinedesign\Model\ResourceModel\Canvas\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+		<arguments>
+			<argument name="mainTable" xsi:type="string">tph_design_type</argument>
+			<argument name="resourceModel" xsi:type="string">Tph\Onlinedesign\Model\ResourceModel\Canvas</argument>
+		</arguments>
+	</virtualType>
+	<type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+		<arguments>
+			<argument name="collections" xsi:type="array">
+				<item name="tph_onlinedesign_index_listing_data_source" xsi:type="string">Tph\Onlinedesign\Model\ResourceModel\Canvas\Grid\Collection</item>
+			</argument>
+		</arguments>
+	</type>
+
+	<virtualType name="Tph\Onlinedesign\Model\ResourceModel\Designid\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">tph_design_id</argument>
+            <argument name="resourceModel" xsi:type="string">Tph\Onlinedesign\Model\ResourceModel\Designid</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="tph_onlinedesign_design_listing_data_source" xsi:type="string">Tph\Onlinedesign\Model\ResourceModel\Designid\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Sales\Api\OrderManagementInterface">
+        <plugin name="after_place_order_operation"
+                type="Tph\Onlinedesign\Plugin\OrderManagement"/>
+    </type>
+
+    <type name="Magento\Quote\Model\Quote\Item\ToOrderItem">
+        <plugin name="HelloWorld_to_order_item" type="Tph\Onlinedesign\Plugin\OrderItem"/> 
+    </type>
+</config>

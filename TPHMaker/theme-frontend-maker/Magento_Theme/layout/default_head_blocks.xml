@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <meta name="referrer" content="strict-origin-when-cross-origin"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+        <link src="Magento_Theme::favicon.ico" rel="icon" sizes="32x32" />
+        <font src="fonts/GT-Walsheim-Bold.woff2" as="font" />
+        <font src="fonts/GT-Walsheim-Light.woff2" as="font" />
+        <font src="fonts/GT-Walsheim-Regular.woff2" as="font" />
+        <font src="fonts/GT-Walsheim-Bold-Oblique.woff2" as="font" />
+        <font src="fonts/GT-Walsheim-Light-Oblique.woff2" as="font" />
+        <font src="fonts/GT-Walsheim-Regular-Oblique.woff2" as="font" />
+        <font src="fonts/opensans/light/opensans-300.woff2" as="font" />
+        <font src="fonts/opensans/regular/opensans-400.woff2" as="font" />
+        <font src="fonts/opensans/semibold/opensans-600.woff2" as="font" />
+        <font src="fonts/opensans/bold/opensans-700.woff2" as="font" />
+        <font src="fonts/Luma-Icons.woff2" as="font" />
+        <link src="js/custom.js" />
+    </head>
+</page>

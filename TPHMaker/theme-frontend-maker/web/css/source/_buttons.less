@@ -1,0 +1,72 @@
+// /**
+//  * Copyright © Magento, Inc. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+
+@button__border-radius: 4px;
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    
+    //  Using buttons mixins
+    button { 
+        color: @color-maker-white;
+        .lib-font-size(16);
+        font-weight: @font-weight__regular;
+        padding: 10px 20px;
+        &:hover, &:focus, &:active {
+            color: @color-maker-white;
+        }
+    }    
+    button,
+    a.action.primary {
+        .lib-css(border-radius, @button__border-radius);
+    }
+
+    button {
+        &.action-dismiss { 
+            background: @color-maker-light-gray;
+            border-color: @color-maker-light-gray;
+            color: @color-maker-black;
+        }
+    }
+
+    body {
+        &:not(._keyfocus) {
+            button {
+                &:focus {
+                    box-shadow: none;
+                }
+            }
+        }
+    }
+
+    a.action.primary {
+        .lib-link-as-button();
+    }
+
+    .action.primary {
+        .lib-button-primary();
+        .lib-font-size(16);
+        font-weight: @font-weight__regular;
+        padding: 10px 20px;
+        span {
+            color: @color-maker-white;
+        }
+    }
+}
+
+//
+//  Mobile
+//  _____________________________________________
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    button {
+        .lib-font-size(15);       
+    }
+    .action.primary {
+        .lib-font-size(15);   
+    }
+}

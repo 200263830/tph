@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="102" height="115" viewBox="0 0 102 115">
+  <g id="Group_1252" data-name="Group 1252" transform="translate(0.408 0.305)">
+    <g id="icon_maps_place_24px" data-name="icon/maps/place_24px" transform="translate(-0.408 -0.267)">
+      <rect id="Boundary" width="102" height="102" transform="translate(0 -0.038)" fill="none"/>
+      <path id="_Color" data-name=" ↳Color" d="M29.5,87l0,0A196.945,196.945,0,0,1,14.75,67.289C8.021,56.995,0,42.248,0,30.451A30.758,30.758,0,0,1,8.634,8.913a28.881,28.881,0,0,1,41.732,0A30.758,30.758,0,0,1,59,30.451c0,11.8-8.021,26.544-14.75,36.838A196.946,196.946,0,0,1,29.5,87Zm0-67.425A10.722,10.722,0,0,0,18.964,30.451,10.722,10.722,0,0,0,29.5,41.327,10.722,10.722,0,0,0,40.036,30.451,10.722,10.722,0,0,0,29.5,19.575Z" transform="translate(21 7.962)" fill="#003b5c"/>
+    </g>
+    <ellipse id="Ellipse_29" data-name="Ellipse 29" cx="22" cy="5.5" rx="22" ry="5.5" transform="translate(28.592 103.695)" fill="#003b5c"/>
+  </g>
+</svg>

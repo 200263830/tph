@@ -1,0 +1,8 @@
+<?php
+
+$currentProduct = $block->getCurrentProduct();
+$size_chart = $currentProduct->getData('size_chart_product');
+echo $this->getLayout()
+->createBlock('Magento\Cms\Block\Block')
+->setBlockId($size_chart)
+->toHtml();

@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\Magento_Catalog\\web",
+    "\\Magento_Theme",
+    "\\Magento_Theme\\layout",
+    "\\Magento_Theme\\web",
+    "\\web",
+    "\\web\\css",
+    "\\web\\css\\source",
+    "\\web\\css\\source\\lib",
+    "\\web\\css\\source\\lib\\variables"
+  ],
+  "SelectedNode": "\\web\\css\\source\\lib\\variables\\_extend-variables.less",
+  "PreviewInSolutionExplorer": false
+}

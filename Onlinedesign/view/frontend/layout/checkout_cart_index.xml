@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category    TPH
+ * @package     Tph_Onlinedesign
+ * add block for the configurable product
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <script src="https://sdk.canva.com/partnership.js" src_type="url"/>
+    </head>
+    <body>
+        <referenceBlock name="additional.product.info">
+            <block class="Tph\Onlinedesign\Block\Customimage\CartItemImageBlock"
+                   name="tph.cart.item.image" template="Tph_Onlinedesign::product_image_cart.phtml" before="-">
+            </block>
+        </referenceBlock>
+    </body>
+</page>

@@ -1,0 +1,76 @@
+<?php
+/* @var \Tph\Onlinedesign\Block\Canvapage $block */
+
+
+$block->getAutoAuthToken();
+$init = new CanvaInit();
+$sessionId = $block->getSessionId();
+$AutoAuthToken = $init->getAutoAuthToken($sessionId);
+$PARTNER_API_KEY = $block->getApiKey();
+$base_url = $block->getBaseUrl();
+$collection = $block->getProductCollection();
+$productUrl = $collection->getProductUrl();
+$baseurl = $block->getBaseUrl();
+?>
+<style type="text/css">
+  #hbl-live-chat-wrapper{
+    display: none;
+  }
+</style>
+<div id="canva-container" ></div>
+<script type="text/javascript">
+     var productData = {};
+    (async () => {
+              //initialize creates a unique user session in Canva, secured to the user by JWT
+              var apiKey = '<?= $PARTNER_API_KEY ?>';
+              var autoAuthToken = '<?= $AutoAuthToken; ?>';
+              const api = await Canva.Partnership.initialize({
+                  apiKey: apiKey,
+                  container: document.getElementById("canva-container"),
+                  autoAuthToken: autoAuthToken
+              });
+              var  baseurl = '<?= $baseurl; ?>';
+
+              const onBackClick = () => {
+                // the user has clicked the "Back" button in the editor's header
+                console.log("You clicked the 'Back' button!");
+                window.location.reload();
+              };
+
+              //this allows a user to edit the product they select
+              const onProductSelect = (opts) => {
+                console.log(opts);
+                productData['productId'] = opts.productId;
+                productData['productSizeOptionId'] = opts.partnerProductId;
+                                                                    
+                  api.createDesign({
+
+                  ...opts,
+                  onArtworkCreate,
+                  onBackClick
+                });
+              };
+
+              const onArtworkCreate = (opts) => {
+                // the user has finished proofing their design
+                console.log(opts);
+                productData['previewImageSrc'] = opts.previewImageSrc;
+                productData['artworkId'] = opts.artworkId;
+                productData['designId'] = opts.designId;
+                console.log(opts);
+                jQuery.ajax({
+                showLoader: true,
+                url: baseurl + 'onlinedesign/index/image',
+                data: {productData: productData,edit:0,producdetail:2},
+                type: "POST",
+                dataType: 'json',
+            }).done(function (data) {
+               window.location.href = data.redirectUrl;
+            });
+
+
+              };
+              api.showCatalog({onProductSelect});
+
+      })();
+  </script>

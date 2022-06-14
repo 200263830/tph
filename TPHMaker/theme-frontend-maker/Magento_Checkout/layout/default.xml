@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="checkout.cart.coupon" remove="true"/> <!-- Remove promo from the cart -->
+        <block class="Magento\Checkout\Block\Cart\Coupon" name="checkout.cart.coupon2" as="coupon" template="Magento_Checkout::cart/coupon.phtml"/> <!-- Add promo inside the sidebar the cart -->
+        <move element="checkout.cart.coupon2" destination="cart.summary" after="checkout.cart.totals.container"/>        
+    </body>
+</page>

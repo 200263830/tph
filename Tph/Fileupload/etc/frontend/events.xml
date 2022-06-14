@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category    TPH
+ * @package     Tph_Fileupload
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="checkout_cart_product_add_after">
+        <observer name="Tph_Fileupload_checkout_cart_product_add_after" instance="Tph\Fileupload\Observer\CartProductAdd" />
+    </event>
+   <event name="checkout_cart_product_update_after">
+        <observer name="Tph_Fileupload_checkout_cart_product_save_after" instance="Tph\Fileupload\Observer\ProductUpdateCart" />
+    </event>
+    <!--<event name="checkout_cart_update_items_after">
+        <observer name="Tph_Fileupload_checkout_cart_product_save_after" instance="Tph\Fileupload\Observer\ProductUpdateCart" />
+    </event>
+    <event name="checkout_cart_product_update_after">
+        <observer name="Tph_Fileupload_checkout_cart_product_save_after" instance="Tph\Fileupload\Observer\ProductUpdateCart" />
+    </event>
+    <event name="checkout_cart_update_items_before">
+        <observer name="Tph_Fileupload_checkout_cart_product_save_after" instance="Tph\Fileupload\Observer\ProductUpdateCart" />
+    </event>-->
+ </config>

@@ -1,0 +1,180 @@
+<?php
+/**
+ * @var $block \Tph\Onlinedesign\Block\Catalog\Product\View
+ *  @category    TPH
+ * @package     Tph_Onlinedesign
+ */
+
+
+$currentProduct = $block->getCurrentProduct();
+$attributeValue = $currentProduct->getData('product_design_type');
+$attributeId = $currentProduct->getData('product_design_id');
+$size_chart = $currentProduct->getData('size_chart_product');
+$pid = $currentProduct->getData('entity_id');
+$pType = $currentProduct->getTypeId();
+$pcType = (int) $currentProduct->getData('button_type');
+$sessionId = $block->getSessionId();
+$blockObj = $block->getLayout()->createBlock('Tph\Onlinedesign\Block\Canvapage');
+$blockObj->getAutoAuthToken();
+$init = new CanvaInit();
+$AutoAuthToken = $init->getAutoAuthToken($sessionId);
+$_SESSION['views'] = (isset($_SESSION['views']))? $_SESSION['views']+1:1;
+$_SESSION['canva_page'] = (isset($_SESSION['canva_page']))? $_SESSION['canva_page']:0;
+$_SESSION['canva_detail'] = (isset($_SESSION['canva_detail']))? $_SESSION['canva_detail']:0;
+if($_SESSION['views'] >= 2 ){
+$_SESSION[$pid."_preview_image"]=0;
+$_SESSION['canva_page'] = 0;
+$_SESSION['canva_detail'] = 0;
+}
+$size = 0;
+if(isset($_SESSION['canva_detail']['productSizeOptionId'])){
+ $size = explode("_",$_SESSION['canva_detail']['productSizeOptionId']);
+ $size = end($size);
+}
+$item_id = (int)$block->getParam()->getParam('id');
+/* Display The Canva  Image cart page Edit product Page */
+
+if(!empty($item_id)){
+  if($item_id!=$pid){
+  $itemData = $block->getItemProduct($item_id);
+  $img = $itemData->getData('custom_image');
+  $cimg = $itemData->getData('custom_image');
+  $mediaUrl = $block->getMediaUrl();
+  $candi = $itemData->getData('canva_design_id');
+  $ct = $itemData->getData('canva_type');
+  $awi = $itemData->getData('artwork_id');
+  $itemup = $block->getItemData($item_id);
+  /*echo "<pre>";
+  print_r($itemup->getData());
+  die();*/
+
+  $ct = (!empty($ct))?$ct:$itemup->getData('canva_type');
+  if($ct==1 || $ct==2){ ?>
+    <style>
+        .product-add-form .field.file { display: none !important; }
+        .swatch-attribute.size .swatch-option, .swatch-attribute.manufacturer .swatch-option
+        {
+            display: none !important;
+        }
+        .swatch-attribute.size .swatch-option.selected, .swatch-attribute.manufacturer .swatch-option.selected
+        {
+            display: block !important;
+        }
+        .swatch-attribute.shape .swatch-option
+        {
+            display: none !important;
+        }
+        .swatch-attribute.shape .swatch-option.text.selected
+        {
+            display: block !important;
+        }
+
+    </style>
+      <script type="text/javascript">
+          require(['jquery', 'jquery/ui'], function($){
+              jQuery(".Orientation .product-custom-option").attr('disabled','disabled');
+          });
+      </script>
+ <?php } else if($ct==3){ ?>
+
+<style>
+    .product-info-main .canva-design-button, .product-info-main #canva-design-button
+    {
+        display: none !important;
+    }
+    .swatch-attribute.size .swatch-option, .swatch-attribute.manufacturer .swatch-option
+    {
+        display: none !important;
+    }
+    .swatch-attribute.size .swatch-option.selected, .swatch-attribute.manufacturer .swatch-option.selected
+    {
+        display: block !important;
+    }
+    .swatch-attribute.shape .swatch-option
+    {
+        display: none !important;
+    }
+    .swatch-attribute.shape .swatch-option.text.selected
+    {
+        display: block !important;
+    }
+    </style>
+      <script type="text/javascript">
+          require(['jquery', 'jquery/ui'], function($){
+              jQuery(".Orientation .product-custom-option").attr('disabled','disabled');
+          });
+      </script>
+  <?php }
+  if($itemup->getData('canva_type')){
+    $img = $itemup->getData('custom_image');
+  }
+  if(!empty($img)){
+  $_SESSION[$pid . "_preview_image"] = $mediaUrl . \Tph\Onlinedesign\Helper\Data::IMAGE_FOLDER . $img;
+    }
+  }
+}
+?>
+<input type="text"  id="product-canva-image" data-product-canva-image="<?= /* @noEscape */(!empty($_SESSION[$pid . "_preview_image"])) ? $_SESSION[$pid . "_preview_image"] : '0'; ?>"  name="product-canva-image" value="<?= /* @noEscape */(!empty($_SESSION[$pid . "_preview_image"])) ? $_SESSION[$pid . "_preview_image"] : ''; ?>" class="swatch-input">
+<?php
+if (empty($_SESSION['canva_page']) && $_SESSION['canva_page'] == 0) {
+    if ($pcType == \Tph\Onlinedesign\Helper\Data::CANVA_BUTTON) {
+        ?>
+        <input type="hidden" name="custom_image" value="<?= /* @noEscape */(!empty($itemData)) ? $itemData->getData('custom_image') : ''; ?>" >
+        <input type="hidden" name="designid" value="<?= /* @noEscape */(!empty($itemData)) ? $itemData->getData('design_id') : ''; ?>" >
+        <input type="hidden" name="canva_type" value="2" >
+        <span data-design-type="<?= (($attributeValue !== null) ? $attributeValue : ''); ?>" data-button-size="<?= (($block->getButtonSize() !== null) ? $block->getButtonSize() : 'default'); ?>" data-button-theme="<?= (($block->getButtonStyle() !== null) ? $block->getButtonStyle() : 'default'); ?>" data-api-key="<?= $block->getApiKey(); ?>"
+              class="canva-design-button" data-product-type="<?= $pType; ?>" id="canva-design-button" data-productId="<?= $pid; ?>" data-edit="0" data-url="<?= $block->getBaseUrl(); ?>" style="display:none; margin-bottom: 28px;" data-editor-file-type="jpg" data-on-design-publish="onDesignPublishCallback" ><?php echo __('Design online'); ?><span class="browse-temp"><?php echo __("Canva's design tools let you enjoy designing without the fuss."); ?></span></span>
+        <script type="text/x-magento-init">
+            {
+            "*": {
+            "Tph_Onlinedesign/js/design": { }
+            }
+            }
+
+        </script>
+        <?php
+    } else if ($pcType == \Tph\Onlinedesign\Helper\Data::CANVA_CATALOGUE) {
+        ?>
+        <input type="hidden" name="canva_custom_image" value="<?= /* @noEscape */(!empty($cimg)) ? $cimg : ''; ?>" >
+        <input type="hidden" name="canva_designid" value="<?= /* @noEscape */(!empty($candi)) ? $candi : ''; ?>" >
+        <input type="hidden" name="artworkid" value="<?= /* @noEscape */(!empty($awi)) ? $awi : ''; ?>" >
+        <input type="hidden" name="canva_type" value="1" >
+
+        <span><span title="Design On Tph" class="canva-design-button"  data-url="<?php echo $block->getBaseUrl(); ?>" data-product-design-id="<?= $attributeId; ?>" id="canva-catalogue" data-canva-size="<?= $currentProduct->getData('canva_size_product'); ?>" data-category="" data-canva-design-id="" data-height="" data-width="" data-api-key="<?= $block->getApiKey(); ?>" data-autoauthtoken="<?= $AutoAuthToken ?>" data-design-type="<?= (($attributeValue !== null) ? $attributeValue : ''); ?>" data-pId="<?= $pid; ?>"><?php echo __('Design online'); ?><span class="browse-temp"><?php echo __("Canva's design tools let you enjoy designing without the fuss"); ?></span></span></span>
+        <script type="text/x-magento-init">
+            {
+            "*": {
+            "Tph_Onlinedesign/js/productcatalog": {
+            "category": <?= /* @noEscape */ $block->getCustomOptionValue($currentProduct) ?>
+            }
+            }
+            }
+        </script>
+    <?php }
+} ?>
+<script type="text/x-magento-init">
+    {
+        "*": {
+        "Tph_Onlinedesign/js/detimage": {
+        "image": "<?= /* @noEscape */(!empty($_SESSION[$pid . "_preview_image"])) ? $_SESSION[$pid . "_preview_image"] : '0'; ?>",
+        "size": "<?= /* @noEscape */(!empty($_SESSION["canva_detail"])) ? $size : '0'; ?>",
+        "filename": "<?= /* @noEscape */(!empty($_SESSION["canva_detail"])) ? $_SESSION['canva_detail']['filename']: '0'; ?>",
+        "category": <?= /* @noEscape */ $block->getCustomOptionValue($currentProduct) ?>
+            }
+        }
+    }
+</script>
+<?php if ($_SESSION['canva_page'] != 0) {
+ $cps = (!empty($_SESSION['canva_detail']['productSizeOptionId']))?$_SESSION['canva_detail']['productSizeOptionId']:0;
+ $pids = (!empty($_SESSION['canva_detail']['productId']))?$_SESSION['canva_detail']['productId']:$attributeId;
+ ?>
+    <span><span class="button tbh-edit-design canva-design-button" href = "#" data-url = "<?= $block->getBaseUrl(); ?>" data-edit = "1" data-design-id ="<?= $_SESSION['canva_detail']['designId']; ?>" data-size-option ="<?= $cps; ?>" data-product-id = "<?= $pids ?>" id = "edit-design" data-api-key = "<?= $block->getApiKey(); ?>" data-auth-token = "<?= $AutoAuthToken ?>"><?php echo __('Edit Design');
+    ?><span class="browse-temp" ><?php echo __("Canva's design tools let you enjoy designing without the fuss"); ?></span></span></span>
+    <script type="text/x-magento-init">
+        {
+            "*": {
+            "Tph_Onlinedesign/js/productedit": {}
+            }
+        }
+    </script>
+<?php } ?>

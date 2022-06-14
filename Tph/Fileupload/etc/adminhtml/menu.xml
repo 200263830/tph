@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Tph_Fileupload::fileupload"
+             title="file upload"
+             module="Tph_Fileupload"
+             sortOrder="30"
+             resource="Tph_Fileupload::fileupload"
+             parent="Tph_Core::core"/>
+        <add id="Tph_Fileupload::configuration"
+             title="Configuration"
+             module="Tph_Fileupload"
+             sortOrder="40"
+             parent="Tph_Fileupload::fileupload"
+             action="adminhtml/system_config/edit/section/fileupload"
+             resource="Tph_Fileupload::configuration"/>
+    </menu>
+</config>

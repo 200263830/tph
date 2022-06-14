@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="tph" translate="label" sortOrder="450">
+            <label>tph</label>
+        </tab>
+        <section id="canvas" translate="label" type="text" sortOrder="300" showInDefault="1" showInWebsite="1"
+                 showInStore="1">
+            <class>separator-top</class>
+            <label>Canvas</label>
+            <tab>tph</tab>
+            <resource>Tph_Onlinedesign::config_canvas</resource>
+            <group id="general" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>General</label>
+                <field id="enable" translate="label comment" type="select" sortOrder="0" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Module Enable</label>
+                    <comment>Enable Module</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="api_key" translate="label comment" type="text" sortOrder="7" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Api Key</label>
+                    <validate>required-entry</validate>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <field id="partner_api_key" translate="label comment" type="text" sortOrder="8" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Partner Id</label>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <field id="partner_api_secret" translate="label comment" type="text" sortOrder="9" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Partner Api Secret</label>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <field id="artwork_api_secret" translate="label comment" type="text" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Artwork Api Secret</label>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+
+                <field id="api_url" translate="label comment" type="text" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Api Url</label>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+
+                <field id="button_size" translate="label" type="select" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Choose a button size</label>        
+                    <source_model>Tph\Onlinedesign\Model\Config\Source\ButtonSize</source_model>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <field id="button_style" translate="label" type="select" sortOrder="12" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Choose a button style</label>        
+                    <source_model>Tph\Onlinedesign\Model\Config\Source\ButtonStyle</source_model>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+               
+            </group>
+        </section>
+    </system>
+</config>
